@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Find Gigs | MyGigsAfrica</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Optional custom styles -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Inter', sans-serif;
+    }
+    .navbar-brand {
+      font-weight: 700;
+      color: #2c5282 !important; /* Using your primary color */
+    }
+    .homepage-section {
+      min-height: 500px;
+    }
+    .worker-card-container {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 rounded">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">MyGigsAfrica</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="find-gigs.html"
+              >Find Gigs</a
+            >
+          </li>
+            <a class="nav-link" href="login.html">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary ms-2" href="register.html">Join Now</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container">
+    <header class="mb-4">
+      <h1 class="mb-3">Find Skilled Freelance Gigs Across Africa</h1>
+      <p class="lead">
+        Search and filter gigs by skill, location, or keyword to find the perfect
+        freelance opportunity.
+      </p>
+    </header>
+
+    <section class="homepage-sections d-flex flex-column flex-md-row gap-4">
+      <!-- Find Gigs Section -->
+      <article class="homepage-section flex-fill p-4 rounded shadow-sm bg-white">
+        <h3 class="mb-3">Search Gigs</h3>
+        <form id="gigSearchForm" class="form" novalidate>
+          <div class="mb-3">
+            <input
+              type="text"
+              id="searchTerm"
+              name="searchTerm"
+              class="form-control"
+              placeholder="Search by gig title, skill, or location"
+            />
+          </div>
+          <div class="mb-3">
+            <select id="skillFilter" name="skillFilter" class="form-select">
+              <option value="">All Skills</option>
+              <option value="Graphic Design">Graphic Design</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Content Writing">Content Writing</option>
+              <option value="Marketing">Marketing</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <select id="locationFilter" name="locationFilter" class="form-select">
+              <option value="">All Locations</option>
+              <option value="Nairobi">Nairobi</option>
+              <option value="Lagos">Lagos</option>
+              <option value="Remote">Remote</option>
+              <option value="Accra">Accra</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <div id="gigResults" class="worker-card-container mt-4">
+          <!-- Gig search results will be dynamically inserted here -->
+        </div>
+      </article>
+
+      <!-- Register as Freelancer Section -->
+      <article class="homepage-section flex-fill p-4 rounded shadow-sm bg-white">
+        <h3 class="mb-3">Create Your Freelancer Profile</h3>
+        <form id="freelancerRegisterForm" enctype="multipart/form-data" class="form" novalidate>
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="skills" class="form-label"
+              >Skills/Trade (comma separated)</label
+            >
+            <input
+              type="text"
+              id="skills"
+              name="skills"
+              class="form-control"
+              placeholder="e.g. Graphic Design, Web Development, Writing"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="experience" class="form-label">Years of Experience</label>
+            <input
+              type="number"
+              id="experience"
+              name="experience"
+              class="form-control"
+              min="0"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="bio" class="form-label">Short Bio</label>
+            <textarea
+              id="bio"
+              name="bio"
+              rows="3"
+              class="form-control"
+              placeholder="Tell us a bit about your skills and experience"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="photo" class="form-label">Profile Photo (optional)</label>
+            <input
+              type="file"
+              id="photo"
+              name="photo"
+              accept="image/*"
+              class="form-control"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Register &amp; Post Profile</button>
+        </form>
+      </article>
+    </section>
+  </main>
+
+  <footer class="text-center py-4 bg-white mt-5 shadow-sm">
+    <p class="mb-0">&copy; 2025 MyGigsAfrica. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS Bundle (Popper + Bootstrap JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Optional: Custom JS for form handling -->
+ <script>
+  // --- Fetch and filter gigs ---
+document.getElementById('gigSearchForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const searchTerm = document.getElementById('searchTerm').value.toLowerCase();
+  const skillFilter = document.getElementById('skillFilter').value.toLowerCase();
+  const locationFilter = document.getElementById('locationFilter').value.toLowerCase();
+
+  try {
+    const res = await fetch('http://localhost:8080/api/gigs'); // Adjust backend URL
+    if (!res.ok) throw new Error('Failed to fetch gigs');
+
+    const allGigs = await res.json();
+
+    const filteredGigs = allGigs.filter(gig => {
+      const matchesSearch =
+        !searchTerm ||
+        (gig.title && gig.title.toLowerCase().includes(searchTerm)) ||
+        (gig.description && gig.description.toLowerCase().includes(searchTerm));
+
+      const matchesSkill =
+        !skillFilter || (gig.skills && gig.skills.some(s => s.toLowerCase() === skillFilter));
+
+      const matchesLocation =
+        !locationFilter || (gig.location && gig.location.toLowerCase() === locationFilter);
+
+      return matchesSearch && matchesSkill && matchesLocation;
+    });
+
+    renderGigs(filteredGigs);
+
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+function renderGigs(gigs) {
+  const resultsContainer = document.getElementById('gigResults');
+  resultsContainer.innerHTML = '';
+
+  if (gigs.length === 0) {
+    resultsContainer.innerHTML = '<p class="text-muted">No gigs found.</p>';
+    return;
+  }
+
+  gigs.forEach(gig => {
+    const card = document.createElement('div');
+    card.className = 'card mb-3 shadow-sm';
+    card.innerHTML = `
+      <div class="card-body">
+        <h5 class="card-title">${gig.title}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">${gig.price || 'N/A'} - ${capitalize(gig.location)}</h6>
+        <p class="card-text">${gig.description}</p>
+        <a href="gig-details.html?id=${gig.id}" class="card-link">View Details</a>
+      </div>
+    `;
+    resultsContainer.appendChild(card);
+  });
+}
+
+function capitalize(str) {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// --- Submit freelancer profile form ---
+document.getElementById('freelancerRegisterForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+
+  // Currently excluding photo upload — send only JSON data here
+  const profileData = {
+    fullname: formData.get('fullname'),
+    email: formData.get('email'),
+    phone: formData.get('phone'),
+    location: formData.get('location'),
+    skills: formData.get('skills'),
+    experience: parseInt(formData.get('experience'), 10),
+    bio: formData.get('bio')
+  };
+
+  try {
+    const response = await fetch('http://localhost:8080/api/freelancers', {  // Adjust endpoint
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(profileData)
+    });
+
+    if (!response.ok) {
+      const errDetails = await response.json();
+      alert('Failed to register freelancer: ' + (errDetails.message || response.statusText));
+      return;
+    }
+
+    alert('Thank you for registering! Your profile will be reviewed shortly.');
+    this.reset();
+
+  } catch (error) {
+    alert('Network error: ' + error.message);
+  }
+});
+
+ </script>
+</body>
+</html>

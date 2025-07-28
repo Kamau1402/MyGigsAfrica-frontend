@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MyGigsAfrica - Gig Economy Platform for Africa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#2C5282",
+            secondary: "#38B2AC",
+            accent: "#ED8936",
+            dark: "#1A202C",
+            light: "#F7FAFC",
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+    body {
+      font-family: "Inter", sans-serif;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, #2c5282 0%, #38b2ac 100%);
+    }
+
+    .gig-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-modal {
+      transition: all 0.3s ease;
+    }
+
+    .payment-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-briefcase text-2xl text-primary"></i>
+          <a href="index.html" class="text-xl font-bold text-primary"
+            >MyGigsAfrica</a
+          >
+        </div>
+
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="home.html" class="text-gray-700 hover:text-primary">Home</a>
+          <a href="find-gigs.html" class="text-gray-700 hover:text-primary"
+            >Find Gigs</a
+            >
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <a href="login.html" class="text-gray-700 hover:text-primary">
+            <i class="fas fa-sign-in-alt"></i>
+            <span class="hidden md:inline ml-1">Login</span>
+          </a>
+          <button
+            onclick="togglePaymentModal()"
+            class="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+          >
+            <span class="hidden md:inline">Join Now</span>
+            <span class="md:hidden">Sign Up</span>
+          </button>
+          <button class="md:hidden text-gray-700">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-gradient text-white">
+    <div class="container mx-auto px-4 py-16 md:py-24">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">
+            Find & Post Gigs Across Africa
+          </h1>
+          <p class="text-xl mb-8">
+            Connect with opportunities that match your skills and grow your
+            freelance career.
+          </p>
+          <div
+            class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
+          >
+            <button
+              onclick="togglePaymentModal()"
+              class="bg-white text-primary px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition"
+            >
+              Join for KSh 200/year
+            </button>
+            <a
+              href="#gigs"
+              class="border-2 border-white text-white px-6 py-3 rounded-md font-semibold hover:bg-white hover:text-primary transition"
+              >Browse Gigs</a
+            >
+          </div>
+        </div>
+        <div class="md:w-1/2">
+          <img
+            src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="Freelancer working"
+            class="rounded-lg shadow-xl"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="bg-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <h3 class="text-3xl font-bold text-primary mb-2">5,000+</h3>
+          <p class="text-gray-600">Active Gigs</p>
+        </div>
+        <div>
+          <h3 class="text-3xl font-bold text-primary mb-2">20,000+</h3>
+          <p class="text-gray-600">Freelancers</p>
+        </div>
+        <div>
+          <h3 class="text-3xl font-bold text-primary mb-2">15+</h3>
+          <p class="text-gray-600">African Countries</p>
+        </div>
+        <div>
+          <h3 class="text-3xl font-bold text-primary mb-2">95%</h3>
+          <p class="text-gray-600">Satisfaction Rate</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">How It Works</h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div
+            class="bg-primary w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <i class="fas fa-user-plus text-white text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">1. Create Account</h3>
+          <p class="text-gray-600">
+            Sign up and pay the annual membership fee of KSh 200 to access all
+            features.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div
+            class="bg-secondary w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <i class="fas fa-search text-white text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">2. Find or Post Gigs</h3>
+          <p class="text-gray-600">
+            Browse available gigs or post your own opportunities if you're
+            hiring.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div
+            class="bg-accent w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <i class="fas fa-handshake text-white text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">3. Connect & Work</h3>
+          <p class="text-gray-600">
+            Communicate through our platform and get the job done with secure
+            payments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Gigs -->
+  <section id="gigs" class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-bold">Featured Gigs</h2>
+        <a href="gigs.html" class="text-primary hover:underline">View All</a>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Gig Card 1 -->
+        <div
+          class="gig-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+        >
+          <img
+            src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="Graphic Design"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-semibold">Logo Design</h3>
+              <span
+                class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
+                >KSh 5,000</span
+              >
+            </div>
+            <p class="text-gray-600 mb-4">
+              Need a professional logo for my new startup in Nairobi.
+            </p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <i class="fas fa-map-marker-alt mr-1"></i>
+              <span>Nairobi, Kenya</span>
+            </div>
+            <button
+              class="w-full bg-primary text-white py-2 rounded hover:bg-blue-700 transition"
+            >
+              Apply Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Gig Card 2 -->
+        <div
+          class="gig-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+        >
+          <img
+            src="https://images.pexels.com/photos/1181275/pexels-photo-1181275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="Web Development"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-semibold">Website Development</h3>
+              <span
+                class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
+                >KSh 15,000</span
+              >
+            </div>
+            <p class="text-gray-600 mb-4">
+              Looking for a developer to build an e-commerce site for my business.
+            </p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <i class="fas fa-map-marker-alt mr-1"></i>
+              <span>Lagos, Nigeria</span>
+            </div>
+            <button
+              class="w-full bg-primary text-white py-2 rounded hover:bg-blue-700 transition"
+            >
+              Apply Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Gig Card 3 -->
+        <div
+          class="gig-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300"
+        >
+          <img
+            src="https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="Content Writing"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-semibold">Blog Content Writer</h3>
+              <span
+                class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
+                >KSh 800/article</span
+              >
+            </div>
+            <p class="text-gray-600 mb-4">
+              Need regular blog posts about technology trends in Africa.
+            </p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <i class="fas fa-map-marker-alt mr-1"></i>
+              <span>Remote</span>
+            </div>
+            <button
+              class="w-full bg-primary text-white py-2 rounded hover:bg-blue-700 transition"
+            >
+              Apply Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="bg-primary text-white py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">What Our Users Say</h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white bg-opacity-10 p-6 rounded-lg">
+          <div class="mb-4">
+            <h4 class="font-semibold">Sarah K.</h4>
+            <p class="text-white text-opacity-70">Graphic Designer</p>
+          </div>
+          <p>
+            "MyGigsAfrica has transformed my freelance career. I've found
+            consistent work and built great relationships with clients across
+            the continent."
+          </p>
+        </div>
+
+        <div class="bg-white bg-opacity-10 p-6 rounded-lg">
+          <div class="mb-4">
+            <h4 class="font-semibold">James O.</h4>
+            <p class="text-white text-opacity-70">Web Developer</p>
+          </div>
+          <p>
+            "The KSh 200 annual fee is a small price for the quality of gigs I've
+            accessed. My income has doubled since joining."
+          </p>
+        </div>
+
+        <div class="bg-white bg-opacity-10 p-6 rounded-lg">
+          <div class="mb-4">
+            <h4 class="font-semibold">Amina B.</h4>
+            <p class="text-white text-opacity-70">Business Owner</p>
+          </div>
+          <p>
+            "As a small business owner, I've found amazing talent here. The
+            platform makes it easy to find skilled professionals for any
+            project."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Grow Your Freelance Career?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">
+        Join thousands of African freelancers finding meaningful work through
+        MyGigsAfrica.
+      </p>
+      <button
+        onclick="togglePaymentModal()"
+        class="bg-primary text-white px-8 py-3 rounded-md font-semibold hover:bg-blue-700 transition"
+      >
+        Sign Up for KSh 200/year
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <i class="fas fa-briefcase text-2xl text-primary"></i>
+            <span class="text-xl font-bold">MyGigsAfrica</span>
+          </div>
+          <p class="text-gray-400">
+            Connecting African talent with opportunities across the continent.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li>
+              <a href="index.html" class="text-gray-400 hover:text-white transition"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="gigs.html" class="text-gray-400 hover:text-white transition"
+                >Find Gigs</a
+              >
+            </li>
+            <li>
+              <a
+                href="how-it-works.html"
+                class="text-gray-400 hover:text-white transition"
+                >How It Works</a
+              >
+            </li>
+            <li>
+              <a
+                href="post-gig.html"
+                class="text-gray-400 hover:text-white transition"
+                >Post a Gig</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Support</h4>
+          <ul class="space-y-2">
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition">FAQ</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Contact Us</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Privacy Policy</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-400 hover:text-white transition"
+                >Terms of Service</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+          <div class="flex space-x-4 mb-4">
+            <a href="#" class="text-gray-400 hover:text-white transition"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+          </div>
+          <p class="text-gray-400">Email: info@mygigsafrica.com</p>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2023 MyGigsAfrica. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Payment Modal -->
+  <div
+    id="paymentModal"
+    class="payment-modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 pointer-events-none"
+  >
+    <div
+      class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 overflow-hidden"
+    >
+      <div class="bg-primary text-white p-4">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-bold">Join MyGigsAfrica</h3>
+          <button
+            onclick="togglePaymentModal()"
+            class="text-white hover:text-gray-200"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="p-6">
+        <div class="mb-6">
+          <h4 class="text-lg font-semibold mb-2">Annual Membership</h4>
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium">Premium Access</p>
+                <p class="text-sm text-gray-600">
+                  Unlimited gig applications and postings
+                </p>
+              </div>
+              <span class="text-xl font-bold">KSh 200</span>
+            </div>
+          </div>
+        </div>
+
+        <form id="paymentForm" class="space-y-4">
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >Email Address</label
+            >
+            <input
+              type="email"
+              id="email"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              for="phone"
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >Phone Number</label
+            >
+            <input
+              type="tel"
+              id="phone"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >Create Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              required
+            />
+          </div>
+
+          <div class="pt-4">
+            <h4 class="text-lg font-semibold mb-2">Payment Method</h4>
+            <div class="space-y-3">
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="mpesa"
+                  name="payment"
+                  value="mpesa"
+                  class="h-4 w-4 text-primary focus:ring-primary"
+                  checked
+                />
+                <label
+                  for="mpesa"
+                  class="ml-2 block text-sm font-medium text-gray-700"
+                  >M-Pesa</label
+                >
+              </div>
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="card"
+                  name="payment"
+                  value="card"
+                  class="h-4 w-4 text-primary focus:ring-primary"
+                />
+                <label
+                  for="card"
+                  class="ml-2 block text-sm font-medium text-gray-700"
+                  >Credit/Debit Card</label
+                >
+              </div>
+              <div class="flex items-center">
+                <input
+                  type="radio"
+                  id="bank"
+                  name="payment"
+                  value="bank"
+                  class="h-4 w-4 text-primary focus:ring-primary"
+                />
+                <label
+                  for="bank"
+                  class="ml-2 block text-sm font-medium text-gray-700"
+                  >Bank Transfer</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div id="mpesaDetails" class="payment-details">
+            <p class="text-sm text-gray-600 mb-2">
+              You'll receive an M-Pesa prompt on your phone to complete payment.
+            </p>
+          </div>
+
+          <div id="cardDetails" class="payment-details hidden">
+            <div class="space-y-3">
+              <div>
+                <label
+                  for="cardNumber"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Card Number</label
+                >
+                <input
+                  type="text"
+                  id="cardNumber"
+                  placeholder="1234 5678 9012 3456"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label
+                    for="expiry"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Expiry Date</label
+                  >
+                  <input
+                    type="text"
+                    id="expiry"
+                    placeholder="MM/YY"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="cvv"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >CVV</label
+                  >
+                  <input
+                    type="text"
+                    id="cvv"
+                    placeholder="123"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="bankDetails" class="payment-details hidden">
+            <p class="text-sm text-gray-600 mb-2">Make payment to:</p>
+            <div class="bg-gray-100 p-3 rounded-md">
+              <p class="font-medium">Bank: Equity Bank</p>
+              <p class="font-medium">Account Name: MyGigsAfrica Ltd</p>
+              <p class="font-medium">Account Number: 1234567890</p>
+              <p class="font-medium">Branch: Nairobi CBD</p>
+              <p class="text-sm mt-2">
+                Use your email as reference and send proof to
+                payments@mygigsafrica.com
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button
+              type="submit"
+              class="w-full bg-primary text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition"
+            >
+              Complete Payment (KSh 200)
+            </button>
+          </div>
+
+          <p class="text-xs text-gray-500 text-center">
+            By joining, you agree to our Terms of Service and Privacy Policy
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle payment modal
+    function togglePaymentModal() {
+      const modal = document.getElementById("paymentModal");
+      modal.classList.toggle("active");
+
+      if (modal.classList.contains("active")) {
+        modal.classList.remove("opacity-0");
+        modal.classList.remove("pointer-events-none");
+        document.body.style.overflow = "hidden";
+      } else {
+        modal.classList.add("opacity-0");
+        modal.classList.add("pointer-events-none");
+        document.body.style.overflow = "auto";
+      }
+    }
+
+    // Handle payment method selection
+    document.querySelectorAll('input[name="payment"]').forEach((radio) => {
+      radio.addEventListener("change", function () {
+        // Hide all payment details
+        document.querySelectorAll(".payment-details").forEach((detail) => {
+          detail.classList.add("hidden");
+        });
+
+        // Show selected payment details
+        const selectedMethod = this.value;
+        document
+          .getElementById(`${selectedMethod}Details`)
+          .classList.remove("hidden");
+      });
+    });
+
+    // Form submission
+    document
+      .getElementById("paymentForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // In a real app, you would process payment here
+        alert("Payment processed successfully! Welcome to MyGigsAfrica.");
+        togglePaymentModal();
+
+        // Reset form
+        this.reset();
+        document.getElementById("mpesaDetails").classList.remove("hidden");
+        document.getElementById("cardDetails").classList.add("hidden");
+        document.getElementById("bankDetails").classList.add("hidden");
+        document.getElementById("mpesa").checked = true;
+      });
+
+    // Close modal when clicking outside
+    document
+      .getElementById("paymentModal")
+      .addEventListener("click", function (e) {
+        if (e.target === this) {
+          togglePaymentModal();
+        }
+      });
+  </script>
+</body>
+</html>
