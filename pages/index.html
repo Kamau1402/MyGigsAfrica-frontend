@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MyGigsAfrica - Gig Economy Platform for Africa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#2C5282",
+            secondary: "#38B2AC",
+            accent: "#ED8936",
+            dark: "#1A202C",
+            light: "#F7FAFC",
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+    body {
+      font-family: "Inter", sans-serif;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, #2c5282 0%, #38b2ac 100%);
+    }
+
+    .gig-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-modal {
+      transition: all 0.3s ease;
+    }
+
+    .payment-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <div id="header"></div>
+  <div id="hero"></div>
+  <div id="stats"></div>
+  <div id="how-it-works"></div>
+  <div id="featured-gigs"></div>
+  <div id="testimonials"></div>
+  <div id="cta"></div>
+  <div id="footer"></div>
+  <div id="payment-modal"></div>
+
+  <script>
+    async function loadHTML(id, url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Failed to load ${url}: ${res.statusText}`);
+        const html = await res.text();
+        document.getElementById(id).innerHTML = html;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loadHTML("header", "header.html");
+    loadHTML("hero", "hero.html");
+    loadHTML("stats", "stats.html");
+    loadHTML("how-it-works", "how-it-works.html");
+    loadHTML("featured-gigs", "featured-gigs.html");
+    loadHTML("testimonials", "testimonials.html");
+    loadHTML("cta", "cta.html");
+    loadHTML("footer", "footer.html");
+    loadHTML("payment-modal", "payment-modal.html");
+
+    // Payment Modal toggle and form script copied from original
+
+    function togglePaymentModal() {
+      const modal = document.getElementById("paymentModal");
+      if (!modal) return;
+      modal.classList.toggle("active");
+
+      if (modal.classList.contains("active")) {
+        modal.classList.remove("opacity-0");
+        modal.classList.remove("pointer-events-none");
+        document.body.style.overflow = "hidden";
+      } else {
+        modal.classList.add("opacity-0");
+        modal.classList.add("pointer-events-none");
+        document.body.style.overflow = "auto";
+      }
+    }
+
+    document.addEventListener("click", function (e) {
+      if (e.target.id === "paymentModal") {
+        togglePaymentModal();
+      }
+    });
+
+    // Since payment modal content loads asynchronously, use event delegation:
+
+    document.body.addEventListener("change", function (e) {
+      if (e.target.name === "payment") {
+        document.querySelectorAll(".payment-details").forEach((el) =>
+          el.classList.add("hidden")
+        );
+        const selected = document.getElementById(e.target.value + "Details");
+        if (selected) selected.classList.remove("hidden");
+      }
+    });
+
+    document.body.addEventListener("submit", function (e) {
+      if (e.target.id === "paymentForm") {
+        e.preventDefault();
+        alert("Payment processed successfully! Welcome to MyGigsAfrica.");
+        togglePaymentModal();
+        e.target.reset();
+        document.getElementById("mpesaDetails").classList.remove("hidden");
+        document.getElementById("cardDetails").classList.add("hidden");
+        document.getElementById("bankDetails").classList.add("hidden");
+        const mpesaRadio = document.getElementById("mpesa");
+        if (mpesaRadio) mpesaRadio.checked = true;
+      }
+    });
+  </script>
+</body>
+</html>
